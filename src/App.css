@@ -4,8 +4,11 @@
 
 .App-header {
   background-color: #c2d6de;
-  height: auto;
   padding: 1rem;
   color: #254f2e;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
+}
+
+a {
+  text-decoration: none;
 }
