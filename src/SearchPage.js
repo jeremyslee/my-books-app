@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
 
 class SearchPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: ''
+      books: [],
+      query: ''    
     };
     this.handleChange = this.handleChange.bind(this);
+  }
+  
+  componentDidMount() {
+    BooksAPI.getAll().then(books => {
+      this.setState({ books })
+    });
   }
 
   handleChange(e) {
@@ -23,12 +31,13 @@ class SearchPage extends Component {
           <Link
             className='back-to-bookshelves'
             to='/'>
-            Back to Bookshelves
+            {/* Back to Bookshelves */}
           </Link>
           <div className='search-books-input'>
             <input
               onChange={this.handleChange}
               type='text'
+              value={this.state.query}
               placeholder='Search by title or author'/>
           </div>
         </div>
