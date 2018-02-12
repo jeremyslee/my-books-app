@@ -6,16 +6,29 @@ class SearchPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: [],
+      results: [],
       query: ''    
     };
     this.handleChange = this.handleChange.bind(this);
   }
   
-  componentDidMount() {
-    BooksAPI.getAll().then(books => {
-      this.setState({ books })
-    });
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.query !== prevState.query) {
+      if (this.state.query) {
+        console.log('ran');
+        BooksAPI.search(this.state.query)
+          .then(result => {
+            this.setState({
+              results: [].concat(result.length ? result : [])
+            });
+          })
+          .catch(err => console.log(err));
+      } else {
+        this.setState({
+          results: []
+        });
+      }
+    }
   }
 
   handleChange(e) {
@@ -23,7 +36,7 @@ class SearchPage extends Component {
       query: e.target.value
     });
   }
-
+  
   render() {
     return (
       <div className='search-books'>
