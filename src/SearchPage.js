@@ -38,6 +38,37 @@ class SearchPage extends Component {
   }
   
   render() {
+    const { query, results } = this.state;
+    const resultsToShow = [];
+
+    if (results.length > 0) {
+      results.forEach(book => {
+        const title = book.title + book.subtitle ? `: ${book.subtitle}` : '';
+        const authors = book.authors.length > 1 ? book.authors.join(', ') : book.author;
+        const id = book.id;
+        const url = book.imageLinks.thumbnail;
+        const list = (
+          <li key={id}>
+            <div className='book'>
+              <div className='book-top'>
+                <div className='book-cover' style={{ width: 128, height: 192, backgroundImage: `url("${url}")`}}></div>
+                <div className='book-shelf-changer'>
+                  <select>
+                    <option value="none" disabled>Move to...</option>
+                    <option value="currentlyReading">Currently Reading</option>
+                    <option value="wantToRead">Want to Read</option>
+                    <option value="read">Read</option>
+                    <option value="none">None</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </li>
+        );
+        resultsToShow.push(list);
+      })
+    }
+
     return (
       <div className='search-books'>
         <div className='search-books-bar'>
@@ -55,7 +86,7 @@ class SearchPage extends Component {
           </div>
         </div>
         <div className='search-books-results'>
-          <ol className='results-grid'></ol>
+          <ol className='results-grid'>{resultsToShow}</ol>
         </div>
       </div>
     );
