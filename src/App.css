@@ -4,7 +4,7 @@
 
 .App-header {
   background-color: #c2d6de;
-  padding: 1rem;
+  padding: 1.5rem;
   color: #254f2e;
   font-size: 1.2rem;
 }
@@ -25,6 +25,7 @@ a {
   display: block;
   width: 5rem;
   height: 5rem;
+  margin-left: 0.5rem;
   background-image: url('./icons/arrow-back.svg');
   background-repeat: no-repeat;
 }
@@ -41,4 +42,39 @@ a {
   outline: none;
   font-size: 2rem;
   padding-left: 1rem;
+}
+
+.search-books-results {
+  padding: 7rem 1rem 2rem;
+}
+
+/* books grid */
+.books-grid {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
+.books-grid li {
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.book {
+  width: 14rem;
+}
+
+.book-title,
+.book-authors {
+  font-size: 1.1rem;
+}
+
+.book-title {
+  margin-top: 1rem;
+}
+
+.book-authors {
+  color: #999
 }
