@@ -19,7 +19,7 @@ class SearchPage extends Component {
         BooksAPI.search(this.state.query)
           .then(result => {
             this.setState({
-              results: [].concat(result.length ? result : [])
+              results: [].concat(result.error ? [] : result)
             });
           })
           .catch(err => console.log(err));
@@ -43,10 +43,10 @@ class SearchPage extends Component {
 
     if (results.length > 0) {
       results.forEach(book => {
-        const title = book.title + book.subtitle ? `: ${book.subtitle}` : '';
-        const authors = book.authors.length > 1 ? book.authors.join(', ') : book.author;
+        const title = book.title + (book.subtitle === undefined ? '' : `: ${book.subtitle}`);
+        const authors = book.authors ? book.authors.length > 1 ? book.authors.join(', ') : book.authors : '';
         const id = book.id;
-        const url = book.imageLinks.thumbnail;
+        const url = book.imageLinks === undefined ? undefined : book.imageLinks.thumbnail;
         const list = (
           <li key={id}>
             <div className='book'>
@@ -62,6 +62,8 @@ class SearchPage extends Component {
                   </select>
                 </div>
               </div>
+              <div className='book-title'>{title}</div>
+              <div className='book-authors'>{authors}</div>
             </div>
           </li>
         );
@@ -86,7 +88,7 @@ class SearchPage extends Component {
           </div>
         </div>
         <div className='search-books-results'>
-          <ol className='results-grid'>{resultsToShow}</ol>
+          <ol className='books-grid'>{resultsToShow}</ol>
         </div>
       </div>
     );
