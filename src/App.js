@@ -9,13 +9,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shelvedBooks: []
+      collection: []
     }
   }
 
   componentDidMount() {
     BooksAPI.getAll().then(books => {
-      const booksReorganized = books.map(book => ({
+      const collection = books.map(book => ({
         authors: book.authors,
         averageRating: book.averageRating,
         categories: book.categories,
@@ -32,7 +32,7 @@ class App extends Component {
         subtitle: book.subtitle,
         title: book.title,
       }));
-      this.setState({shelvedBooks: booksReorganized});
+      this.setState({collection: collection});
     });
   }
 
@@ -40,7 +40,7 @@ class App extends Component {
     return (
       <div className="App">
         <Route exact path='/' render={() => (
-          <Bookshelves/>
+          <Bookshelves collection={this.state.collection}/>
         )}/>
         <Route exact path='/search' render={() => (
           <SearchPage/>
