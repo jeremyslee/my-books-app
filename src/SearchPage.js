@@ -36,7 +36,7 @@ class SearchPage extends Component {
       query: e.target.value
     });
   }
-  
+
   render() {
     const { query, results } = this.state;
     const resultsToShow = [];
@@ -84,7 +84,7 @@ class SearchPage extends Component {
               onChange={this.handleChange}
               type='text'
               value={this.state.query}
-              placeholder='Search by title or author'/>
+              placeholder='Search by title'/>
           </div>
         </div>
         <div className='search-books-results'>
