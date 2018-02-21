@@ -43,10 +43,11 @@ class App extends Component {
     const newShelf = e.value;
     BooksAPI.update(book, newShelf).then(result => console.log(result));
     this.setState(prevState => ({
-      collection: prevState.collection.map(element => {
-        if (element.id === bookId) element.shelf = newShelf;
-        return element;
-      })
+      collection: prevState.collection.reduce((acc, curr) => {
+        if (curr.id === bookId) curr.shelf = newShelf;
+        if (curr.shelf !== 'none') acc.push(curr);
+        return acc;
+      }, [])
     }));
   }
 
