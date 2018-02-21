@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       collection: []
     }
+    this.updateShelf = this.updateShelf.bind(this);
   }
 
   componentDidMount() {
@@ -36,11 +37,24 @@ class App extends Component {
     });
   }
 
+  updateShelf(e) {
+    const book = e;
+    const bookId = book.id;
+    const newShelf = e.value;
+    BooksAPI.update(book, newShelf).then(result => console.log(result));
+    this.setState(prevState => ({
+      collection: prevState.collection.map(element => {
+        if (element.id === bookId) element.shelf = newShelf;
+        return element;
+      })
+    }));
+  }
+
   render() {
     return (
       <div className="App">
         <Route exact path='/' render={() => (
-          <Bookshelves collection={this.state.collection}/>
+          <Bookshelves collection={this.state.collection} onShelfChange={this.updateShelf}/>
         )}/>
         <Route exact path='/search' render={() => (
           <SearchPage/>

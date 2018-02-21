@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 class Bookshelves extends Component {
   render() {
-    const { collection } = this.props;
+    const { collection, onShelfChange } = this.props;
     console.log(collection);
     const currentlyReading = [];
     const wantToRead = [];
@@ -16,7 +16,7 @@ class Bookshelves extends Component {
             <div className='book-top'>
               <div className='book-cover' style={{ width: 128, height: 192, backgroundImage: `url(${book.imageLinks.thumbnail ? book.imageLinks.thumbnail : ''})` }}></div>
               <div className='book-shelf-changer'>
-                <select>
+                <select id={book.id} onChange={(e) => onShelfChange(e.target)}>
                   <option value='none' disabled>Move to...</option>
                   <option value='currentlyReading'>Currently Reading</option>
                   <option value='wantToRead'>Want to Read</option>
@@ -68,7 +68,6 @@ class Bookshelves extends Component {
             </div>
           </div>
         </div>
-
 
         <Link
           className='open-search'
