@@ -45,7 +45,6 @@ class SearchPage extends Component {
     collection.forEach(element => {
       idBookshelf[element.id] = element.shelf;
     });
-    console.log('fire', idBookshelf);
 
     const resultsToShow = [];
 
@@ -54,7 +53,6 @@ class SearchPage extends Component {
         const title = book.title + (book.subtitle === undefined ? '' : `: ${book.subtitle}`);
         const authors = book.authors ? book.authors.length > 1 ? book.authors.join(', ') : book.authors : '';
         const id = book.id;
-        console.log('id', id);
         const url = book.imageLinks === undefined ? undefined : book.imageLinks.thumbnail;
         const list = (
           <li key={id}>

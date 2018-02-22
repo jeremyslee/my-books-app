@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 class Bookshelves extends Component {
   render() {
     const { collection, onShelfChange } = this.props;
-    console.log(collection);
     const currentlyReading = [];
     const wantToRead = [];
     const read = [];
