@@ -38,7 +38,15 @@ class SearchPage extends Component {
   }
 
   render() {
+    const { collection, onShelfChange } = this.props;
     const { query, results } = this.state;
+
+    const idBookshelf = {};
+    collection.forEach(element => {
+      idBookshelf[element.id] = element.shelf;
+    });
+    console.log('fire', idBookshelf);
+
     const resultsToShow = [];
 
     if (results.length > 0) {
@@ -46,6 +54,7 @@ class SearchPage extends Component {
         const title = book.title + (book.subtitle === undefined ? '' : `: ${book.subtitle}`);
         const authors = book.authors ? book.authors.length > 1 ? book.authors.join(', ') : book.authors : '';
         const id = book.id;
+        console.log('id', id);
         const url = book.imageLinks === undefined ? undefined : book.imageLinks.thumbnail;
         const list = (
           <li key={id}>
@@ -53,12 +62,12 @@ class SearchPage extends Component {
               <div className='book-top'>
                 <div className='book-cover' style={{ width: 128, height: 192, backgroundImage: `url("${url}")`}}></div>
                 <div className='book-shelf-changer'>
-                  <select>
-                    <option value="none" disabled>Move to...</option>
-                    <option value="currentlyReading">Currently Reading</option>
-                    <option value="wantToRead">Want to Read</option>
-                    <option value="read">Read</option>
-                    <option value="none">None</option>
+                  <select id={id} onChange={(e) => onShelfChange(e.target)}>
+                    <option value='none' disabled>Move to...</option>
+                    {idBookshelf[id] === 'currentlyReading' ? <option value='currentlyReading' selected>Currently Reading</option> : <option value='currentlyReading'>Currently Reading</option>}
+                    {idBookshelf[id] === 'wantToRead' ? <option value='wantToRead' selected>Want to Read</option> : <option value='wantToRead'>Want to Read</option>}
+                    {idBookshelf[id] === 'read' ? <option value='read' selected>Read</option> : <option value='read'>Read</option>}
+                    {idBookshelf[id] === undefined ? <option value='none' selected>None</option> : <option value='none'>None</option>}
                   </select>
                 </div>
               </div>

@@ -58,7 +58,7 @@ class App extends Component {
           <Bookshelves collection={this.state.collection} onShelfChange={this.updateShelf}/>
         )}/>
         <Route exact path='/search' render={() => (
-          <SearchPage/>
+          <SearchPage collection={this.state.collection} onShelfChange={this.updateShelf}/>
         )}/>
       </div>
     );
