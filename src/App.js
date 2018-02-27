@@ -44,7 +44,6 @@ class App extends Component {
 
   updateShelf(e) {
     const book = e;
-    const bookId = book.id;
     const newShelf = e.value;
     BooksAPI.update(book, newShelf).then(result => console.log(result));
     this.getCollection();

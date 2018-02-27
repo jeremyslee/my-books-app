@@ -42,8 +42,8 @@ class SearchPage extends Component {
   }
 
   render() {
-    const { collection, onShelfChange } = this.props;
-    const { query, results } = this.state;
+    const { collection } = this.props;
+    const { results } = this.state;
 
     const idBookshelf = {};
     collection.forEach(element => {
