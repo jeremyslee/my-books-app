@@ -3,21 +3,17 @@ import { Link } from 'react-router-dom';
 
 function Error404() {
   return (
-    <div>
-      <div>
-        <div className='hgroup'>
-          <h1>
-            <span>4</span>
-            <span>0</span>
-            <span>4</span>
-          </h1>
-          <h2>
+    <div className='error-page'>
+      <div className='error-page-container'>
+        <div className='error-page-hgroup'>
+          <h1 className='error-page-404'>404</h1>
+          <h2 className='error-page-error'>
             ERROR!
             <span>Page Not Found</span>
           </h2>
         </div>
-        <p>The Page You Requested Could Not Be Found</p>
-        <p>
+        <p className='error-page-not-found'>The Page You Requested Could Not Be Found</p>
+        <p className='error-page-link'>
           <Link to='/'>« Home »</Link>
         </p>
       </div>
