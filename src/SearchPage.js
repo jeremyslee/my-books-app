@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DebounceInput } from 'react-debounce-input';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 
@@ -91,11 +92,13 @@ class SearchPage extends Component {
             {/* Back to Bookshelves */}
           </Link>
           <div className='search-books-input'>
-            <input
-              onChange={this.handleInputChange}
-              type='text'
+            <DebounceInput
+              minLength={1}
+              debounceTimeout={300}
+              element='input'
               value={this.state.query}
-              placeholder='Search by title'/>
+              placeholder='Search by title'
+              onChange={this.handleInputChange}/>
           </div>
         </div>
         <div className='search-books-results'>
