@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Bookshelf from './Bookshelf';
+import Book from './Book';
 
 class Bookshelves extends Component {
   render() {
@@ -10,25 +11,18 @@ class Bookshelves extends Component {
     const read = [];
 
     collection.forEach(book => {
-      let list = (
-        <li key={book.id}>
-          <div className='book'>
-            <div className='book-top'>
-              <div className='book-cover' style={{ width: 128, height: 192, backgroundImage: `url(${book.imageLinks.thumbnail ? book.imageLinks.thumbnail : ''})` }}></div>
-              <div className='book-shelf-changer'>
-                <select id={book.id} value={book.shelf} onChange={(e) => onShelfChange(e.target)}>
-                  <option value='none' disabled>Move to...</option>
-                  <option value='currentlyReading'>Currently Reading</option>
-                  <option value='wantToRead'>Want to Read</option>
-                  <option value='read'>Read</option>
-                  <option value='none'>None</option>
-                </select>
-              </div>
-            </div>
-            <div className='book-title'>{book.subtitle ? `${book.title}: ${book.subtitle}` : book.title}</div>
-            <div className='book-authors'>{book.authors.join(', ')}</div>
-          </div>
-        </li>
+      const title = book.title + (book.subtitle === undefined ? '' : `: ${book.subtitle}`);
+      const authors = book.authors ? book.authors.length > 1 ? book.authors.join(', ') : book.authors : '';
+      const id = book.id;
+      const shelf = book.shelf;
+      const url = book.imageLinks === undefined ? 'http://via.placeholder.com/128x192?text=No%20Cover' : book.imageLinks.thumbnail;
+      const list = (
+        <Book id={id}
+              url={url}
+              shelf={shelf}
+              changeHandler={(e) => onShelfChange(e.target)}
+              title={title}
+              authors={authors}/>
       );
       if (book.shelf === 'currentlyReading') currentlyReading.push(list);
       if (book.shelf === 'wantToRead') wantToRead.push(list);

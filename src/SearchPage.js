@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { Link } from 'react-router-dom';
+import Book from './Book';
 import * as BooksAPI from './BooksAPI';
 
 class SearchPage extends Component {
@@ -60,24 +61,12 @@ class SearchPage extends Component {
         const id = book.id;
         const url = book.imageLinks === undefined ? 'http://via.placeholder.com/128x192?text=No%20Cover' : book.imageLinks.thumbnail;
         const list = (
-          <li key={id}>
-            <div className='book'>
-              <div className='book-top'>
-                <div className='book-cover' style={{ width: 128, height: 192, backgroundImage: `url("${url}")`}}></div>
-                <div className='book-shelf-changer'>
-                  <select id={id} value={idBookshelf[id] === undefined ? 'none' : idBookshelf[id]}onChange={this.handleSelectChange}>
-                    <option disabled>Move to...</option>
-                    <option value='currentlyReading'>Currently Reading</option>
-                    <option value='wantToRead'>Want to Read</option>
-                    <option value='read'>Read</option>
-                    <option value='none'>None</option>
-                  </select>
-                </div>
-              </div>
-              <div className='book-title'>{title}</div>
-              <div className='book-authors'>{authors}</div>
-            </div>
-          </li>
+          <Book id={id}
+                url={url}
+                shelf={idBookshelf[id]}
+                changeHandler={this.handleSelectChange}
+                title={title}
+                authors={authors}/>
         );
         resultsToShow.push(list);
       })
