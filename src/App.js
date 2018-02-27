@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import SearchPage from './SearchPage';
 import Bookshelves from './Bookshelves';
+import Error404 from './Error404';
 import './App.css';
 
 class App extends Component {
@@ -54,12 +55,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route exact path='/' render={() => (
-          <Bookshelves collection={this.state.collection} onShelfChange={this.updateShelf}/>
-        )}/>
-        <Route exact path='/search' render={() => (
-          <SearchPage collection={this.state.collection} onShelfChange={this.updateShelf}/>
-        )}/>
+        <Switch>
+          <Route exact path='/' render={() => (
+            <Bookshelves collection={this.state.collection} onShelfChange={this.updateShelf}/>
+          )}/>
+          <Route exact path='/search' render={() => (
+            <SearchPage collection={this.state.collection} onShelfChange={this.updateShelf}/>
+          )}/>
+          <Route component={Error404}/>
+        </Switch>
       </div>
     );
   }
