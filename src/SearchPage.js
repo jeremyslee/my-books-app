@@ -7,15 +7,15 @@ class SearchPage extends Component {
     super(props);
     this.state = {
       results: [],
-      query: ''    
+      query: ''
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
   
   componentDidUpdate(prevProps, prevState) {
     if (this.state.query !== prevState.query) {
       if (this.state.query) {
-        console.log('ran');
         BooksAPI.search(this.state.query)
           .then(result => {
             this.setState({
@@ -31,10 +31,14 @@ class SearchPage extends Component {
     }
   }
 
-  handleChange(e) {
+  handleInputChange(e) {
     this.setState({
       query: e.target.value
     });
+  }
+
+  handleSelectChange(e) {
+    this.props.onShelfChange(e.target);
   }
 
   render() {
@@ -60,7 +64,7 @@ class SearchPage extends Component {
               <div className='book-top'>
                 <div className='book-cover' style={{ width: 128, height: 192, backgroundImage: `url("${url}")`}}></div>
                 <div className='book-shelf-changer'>
-                  <select id={id} onChange={(e) => onShelfChange(e.target)}>
+                  <select id={id} onChange={this.handleSelectChange}>
                     <option value='none' disabled>Move to...</option>
                     {idBookshelf[id] === 'currentlyReading' ? <option value='currentlyReading' selected>Currently Reading</option> : <option value='currentlyReading'>Currently Reading</option>}
                     {idBookshelf[id] === 'wantToRead' ? <option value='wantToRead' selected>Want to Read</option> : <option value='wantToRead'>Want to Read</option>}
@@ -88,7 +92,7 @@ class SearchPage extends Component {
           </Link>
           <div className='search-books-input'>
             <input
-              onChange={this.handleChange}
+              onChange={this.handleInputChange}
               type='text'
               value={this.state.query}
               placeholder='Search by title'/>

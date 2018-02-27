@@ -11,10 +11,15 @@ class App extends Component {
     this.state = {
       collection: []
     }
+    this.getCollection = this.getCollection.bind(this);
     this.updateShelf = this.updateShelf.bind(this);
   }
 
   componentDidMount() {
+    this.getCollection();
+  }
+
+  getCollection() {
     BooksAPI.getAll().then(books => {
       const collection = books.map(book => ({
         authors: book.authors,
@@ -42,13 +47,7 @@ class App extends Component {
     const bookId = book.id;
     const newShelf = e.value;
     BooksAPI.update(book, newShelf).then(result => console.log(result));
-    this.setState(prevState => ({
-      collection: prevState.collection.reduce((acc, curr) => {
-        if (curr.id === bookId) curr.shelf = newShelf;
-        if (curr.shelf !== 'none') acc.push(curr);
-        return acc;
-      }, [])
-    }));
+    this.getCollection();
   }
 
   render() {
