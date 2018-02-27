@@ -17,9 +17,9 @@ class Bookshelves extends Component {
               <div className='book-shelf-changer'>
                 <select id={book.id} onChange={(e) => onShelfChange(e.target)}>
                   <option value='none' disabled>Move to...</option>
-                  {book.shelf === 'currentlyReading' ? <option value='currentlyReading' selected>Currently Reading</option> : <option value='currentlyReading'>Currently Reading</option>}
-                  {book.shelf === 'wantToRead' ? <option value='wantToRead' selected>Want to Read</option> : <option value='wantToRead'>Want to Read</option>}
-                  {book.shelf === 'read' ? <option value='read' selected>Read</option> : <option value='read'>Read</option>}
+                  <option value='currentlyReading' selected={book.shelf === 'currentlyReading'}>Currently Reading</option>
+                  <option value='wantToRead' selected={book.shelf === 'wantToRead'}>Want to Read</option>
+                  <option value='read' selected={book.shelf === 'read'}>Read</option>
                   <option value='none'>None</option>
                 </select>
               </div>

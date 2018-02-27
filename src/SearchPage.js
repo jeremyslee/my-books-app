@@ -66,10 +66,10 @@ class SearchPage extends Component {
                 <div className='book-shelf-changer'>
                   <select id={id} onChange={this.handleSelectChange}>
                     <option value='none' disabled>Move to...</option>
-                    {idBookshelf[id] === 'currentlyReading' ? <option value='currentlyReading' selected>Currently Reading</option> : <option value='currentlyReading'>Currently Reading</option>}
-                    {idBookshelf[id] === 'wantToRead' ? <option value='wantToRead' selected>Want to Read</option> : <option value='wantToRead'>Want to Read</option>}
-                    {idBookshelf[id] === 'read' ? <option value='read' selected>Read</option> : <option value='read'>Read</option>}
-                    {idBookshelf[id] === undefined ? <option value='none' selected>None</option> : <option value='none'>None</option>}
+                    <option value='currentlyReading' selected={idBookshelf[id] === 'currentlyReading'}>Currently Reading</option>
+                    <option value='wantToRead' selected={idBookshelf[id] === 'wantToRead'}>Want to Read</option>
+                    <option value='read' selected={idBookshelf[id] === 'read'}>Read</option>
+                    <option value='none' selected={idBookshelf[id] === undefined}>None</option>
                   </select>
                 </div>
               </div>
