@@ -58,7 +58,7 @@ class SearchPage extends Component {
         const title = book.title + (book.subtitle === undefined ? '' : `: ${book.subtitle}`);
         const authors = book.authors ? book.authors.length > 1 ? book.authors.join(', ') : book.authors : '';
         const id = book.id;
-        const url = book.imageLinks === undefined ? undefined : book.imageLinks.thumbnail;
+        const url = book.imageLinks === undefined ? 'http://via.placeholder.com/128x192?text=No%20Cover' : book.imageLinks.thumbnail;
         const list = (
           <li key={id}>
             <div className='book'>
