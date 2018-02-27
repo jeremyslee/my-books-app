@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Bookshelf from './Bookshelf';
 
 class Bookshelves extends Component {
   render() {
@@ -41,30 +42,9 @@ class Bookshelves extends Component {
         </div>
         <div className='list-books-content'>
           <div>
-            <div className='bookshelf'>
-              <h2 className='bookshelf-title'>Currently Reading</h2>
-              <div className='bookshelf-books'>
-                <ol className='books-grid'>
-                  {currentlyReading}
-                </ol>
-              </div>
-            </div>
-            <div className='bookshelf'>
-              <h2 className='bookshelf-title'>Want to Read</h2>
-              <div className='bookshelf-books'>
-                <ol className='books-grid'>
-                  {wantToRead}
-                </ol>
-              </div>
-            </div>
-            <div className='bookshelf'>
-              <h2 className='bookshelf-title'>Read</h2>
-              <div className='bookshelf-books'>
-                <ol className='books-grid'>
-                  {read}
-                </ol>
-              </div>
-            </div>
+            <Bookshelf label='Currently Reading' data={currentlyReading}/>
+            <Bookshelf label='Want to Read' data={wantToRead}/>
+            <Bookshelf label='Read' data={read}/>
           </div>
         </div>
 
