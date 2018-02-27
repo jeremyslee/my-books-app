@@ -64,12 +64,12 @@ class SearchPage extends Component {
               <div className='book-top'>
                 <div className='book-cover' style={{ width: 128, height: 192, backgroundImage: `url("${url}")`}}></div>
                 <div className='book-shelf-changer'>
-                  <select id={id} onChange={this.handleSelectChange}>
-                    <option value='none' disabled>Move to...</option>
-                    <option value='currentlyReading' selected={idBookshelf[id] === 'currentlyReading'}>Currently Reading</option>
-                    <option value='wantToRead' selected={idBookshelf[id] === 'wantToRead'}>Want to Read</option>
-                    <option value='read' selected={idBookshelf[id] === 'read'}>Read</option>
-                    <option value='none' selected={idBookshelf[id] === undefined}>None</option>
+                  <select id={id} value={idBookshelf[id] === undefined ? 'none' : idBookshelf[id]}onChange={this.handleSelectChange}>
+                    <option disabled>Move to...</option>
+                    <option value='currentlyReading'>Currently Reading</option>
+                    <option value='wantToRead'>Want to Read</option>
+                    <option value='read'>Read</option>
+                    <option value='none'>None</option>
                   </select>
                 </div>
               </div>
