@@ -47,7 +47,6 @@ class App extends Component {
     const book = e;
     const newShelf = e.value;
     BooksAPI.update(book, newShelf).then(result => {
-      console.log(result);
       this.getCollection();
     });
   }
